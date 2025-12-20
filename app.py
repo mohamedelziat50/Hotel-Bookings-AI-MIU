@@ -10,13 +10,13 @@ app = Flask(__name__)
 warnings.filterwarnings('ignore', category=UserWarning, module='sklearn')
 
 # Load the pre-trained model and preprocessing tools
-mlp_model = load('mlp_model.joblib')
-scaler = load('scaler.joblib')
-selected_features = load('selected_features.joblib')
+mlp_model = load('models/mlp_model.joblib')
+scaler = load('models/scaler.joblib')
+selected_features = load('models/selected_features.joblib')
 
 # Load label encoders (required for prediction)
 try:
-    label_encoders = load('label_encoders.joblib')
+    label_encoders = load('models/label_encoders.joblib')
 except FileNotFoundError:
     print("Warning: label_encoders.joblib not found. You need to create and save label encoders from your notebook.")
     label_encoders = None
