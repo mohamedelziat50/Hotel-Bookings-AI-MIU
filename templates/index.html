@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Cancellation Analysis | Hotel Booking Predictor</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">Booking<span class="logo-accent">Predict</span></div>
+            <nav class="nav">
+                <a href="#" class="nav-link">Help</a>
+                <a href="#" class="nav-link">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="hero-section">
+            <h1 class="hero-title">Booking Cancellation Risk Assessment</h1>
+            <p class="hero-subtitle">Analyze booking details to predict cancellation likelihood</p>
+        </div>
+
+        <div class="form-container">
+            <form id="predictionForm" class="booking-form">
+                <div class="form-row">
+                    <div class="form-section">
+                        <h3 class="section-title">Hotel Details</h3>
+                        <div class="form-group">
+                            <label for="hotel">Hotel Type</label>
+                            <select id="hotel" name="hotel" required>
+                                <option value="">Select hotel type</option>
+                                <option value="Resort Hotel">Resort Hotel</option>
+                                <option value="City Hotel">City Hotel</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="lead_time">Days Until Arrival</label>
+                            <input type="number" id="lead_time" name="lead_time" min="0" placeholder="Enter days" required>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3 class="section-title">Arrival Date</h3>
+                        <div class="form-group">
+                            <label for="arrival_date_month">Month</label>
+                            <select id="arrival_date_month" name="arrival_date_month" required>
+                                <option value="">Select month</option>
+                                <option value="January">January</option>
+                                <option value="February">February</option>
+                                <option value="March">March</option>
+                                <option value="April">April</option>
+                                <option value="May">May</option>
+                                <option value="June">June</option>
+                                <option value="July">July</option>
+                                <option value="August">August</option>
+                                <option value="September">September</option>
+                                <option value="October">October</option>
+                                <option value="November">November</option>
+                                <option value="December">December</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group-inline">
+                            <div class="form-group">
+                                <label for="arrival_date_week_number">Week</label>
+                                <input type="number" id="arrival_date_week_number" name="arrival_date_week_number" min="1" max="53" placeholder="1-53" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="arrival_date_day_of_month">Day</label>
+                                <input type="number" id="arrival_date_day_of_month" name="arrival_date_day_of_month" min="1" max="31" placeholder="1-31" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-section">
+                        <h3 class="section-title">Stay Duration</h3>
+                        <div class="form-group-inline">
+                            <div class="form-group">
+                                <label for="stays_in_weekend_nights">Weekend Nights</label>
+                                <input type="number" id="stays_in_weekend_nights" name="stays_in_weekend_nights" min="0" placeholder="0" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="stays_in_week_nights">Week Nights</label>
+                                <input type="number" id="stays_in_week_nights" name="stays_in_week_nights" min="0" placeholder="0" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3 class="section-title">Guests</h3>
+                        <div class="form-group-inline">
+                            <div class="form-group">
+                                <label for="adults">Adults</label>
+                                <input type="number" id="adults" name="adults" min="0" placeholder="0" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="children">Children</label>
+                                <input type="number" id="children" name="children" min="0" placeholder="0" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="babies">Babies</label>
+                                <input type="number" id="babies" name="babies" min="0" placeholder="0" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section full-width">
+                    <h3 class="section-title">Booking Information</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="meal">Meal Type</label>
+                            <select id="meal" name="meal" required>
+                                <option value="">Select meal type</option>
+                                <option value="BB">Bed & Breakfast</option>
+                                <option value="HB">Half Board</option>
+                                <option value="FB">Full Board</option>
+                                <option value="SC">Self Catering</option>
+                                <option value="Undefined">Undefined</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="country">Country Code</label>
+                            <input type="text" id="country" name="country" placeholder="e.g., PRT, GBR, USA" maxlength="3" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="market_segment">Market Segment</label>
+                            <select id="market_segment" name="market_segment" required>
+                                <option value="">Select market segment</option>
+                                <option value="Direct">Direct</option>
+                                <option value="Corporate">Corporate</option>
+                                <option value="Online TA">Online TA</option>
+                                <option value="Offline TA/TO">Offline TA/TO</option>
+                                <option value="Complementary">Complementary</option>
+                                <option value="Groups">Groups</option>
+                                <option value="Undefined">Undefined</option>
+                                <option value="Aviation">Aviation</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="distribution_channel">Distribution Channel</label>
+                            <select id="distribution_channel" name="distribution_channel" required>
+                                <option value="">Select distribution channel</option>
+                                <option value="Direct">Direct</option>
+                                <option value="Corporate">Corporate</option>
+                                <option value="TA/TO">TA/TO</option>
+                                <option value="Undefined">Undefined</option>
+                                <option value="GDS">GDS</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="is_repeated_guest">Returning Guest</label>
+                            <select id="is_repeated_guest" name="is_repeated_guest" required>
+                                <option value="">Select</option>
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="reserved_room_type">Reserved Room Type</label>
+                            <select id="reserved_room_type" name="reserved_room_type" required>
+                                <option value="">Select room type</option>
+                                <option value="A">Type A</option>
+                                <option value="B">Type B</option>
+                                <option value="C">Type C</option>
+                                <option value="D">Type D</option>
+                                <option value="E">Type E</option>
+                                <option value="F">Type F</option>
+                                <option value="G">Type G</option>
+                                <option value="H">Type H</option>
+                                <option value="L">Type L</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="assigned_room_type">Assigned Room Type</label>
+                            <select id="assigned_room_type" name="assigned_room_type" required>
+                                <option value="">Select room type</option>
+                                <option value="A">Type A</option>
+                                <option value="B">Type B</option>
+                                <option value="C">Type C</option>
+                                <option value="D">Type D</option>
+                                <option value="E">Type E</option>
+                                <option value="F">Type F</option>
+                                <option value="G">Type G</option>
+                                <option value="H">Type H</option>
+                                <option value="L">Type L</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="deposit_type">Deposit Type</label>
+                            <select id="deposit_type" name="deposit_type" required>
+                                <option value="">Select deposit type</option>
+                                <option value="No Deposit">No Deposit</option>
+                                <option value="Non Refund">Non Refundable</option>
+                                <option value="Refundable">Refundable</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="customer_type">Customer Type</label>
+                            <select id="customer_type" name="customer_type" required>
+                                <option value="">Select customer type</option>
+                                <option value="Transient">Transient</option>
+                                <option value="Contract">Contract</option>
+                                <option value="Transient-Party">Transient-Party</option>
+                                <option value="Group">Group</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="adr">Average Daily Rate (€)</label>
+                            <input type="number" id="adr" name="adr" min="0" step="0.01" placeholder="0.00" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="required_car_parking_spaces">Parking Spaces</label>
+                            <input type="number" id="required_car_parking_spaces" name="required_car_parking_spaces" min="0" placeholder="0" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="total_of_special_requests">Special Requests</label>
+                            <input type="number" id="total_of_special_requests" name="total_of_special_requests" min="0" placeholder="0" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="agent">Agent ID <span class="optional">(optional)</span></label>
+                            <input type="number" id="agent" name="agent" min="0" placeholder="Enter agent ID">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="city">City <span class="optional">(optional)</span></label>
+                            <input type="text" id="city" name="city" placeholder="e.g., Mumbai, Delhi">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" id="submitBtn" class="submit-button">
+                    <span class="button-text">Analyze Cancellation Risk</span>
+                </button>
+        </form>
+
+                <div id="result" class="result hidden"></div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 BookingPredict. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../static/script.js"></script>
+</body>
+</html>
+
