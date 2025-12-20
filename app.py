@@ -35,33 +35,6 @@ def preprocess_input(data):
     """Preprocess input data to match the training pipeline"""
     df = pd.DataFrame([data])
     
-    # Ensure all base columns exist (from form input)
-    # These should come from the form, but add defaults if missing
-    base_columns = [
-        'hotel', 'lead_time', 'arrival_date_month', 'arrival_date_week_number',
-        'arrival_date_day_of_month', 'stays_in_weekend_nights', 'stays_in_week_nights',
-        'adults', 'children', 'babies', 'meal', 'country', 'market_segment',
-        'distribution_channel', 'is_repeated_guest', 'reserved_room_type',
-        'assigned_room_type', 'deposit_type', 'customer_type', 'adr',
-        'required_car_parking_spaces', 'total_of_special_requests'
-    ]
-    
-    # Add missing base columns with defaults
-    for col in base_columns:
-        if col not in df.columns:
-            if col == 'children':
-                df[col] = 0
-            elif col == 'days_in_waiting_list':
-                df[col] = 0
-            elif col == 'is_repeated_guest':
-                df[col] = 0
-            elif col == 'required_car_parking_spaces':
-                df[col] = 0
-            elif col == 'total_of_special_requests':
-                df[col] = 0
-            else:
-                df[col] = None
-    
     # Handle missing values - fill with defaults
     df['children'] = df['children'].fillna(0).astype(int)
     df['agent'] = df['agent'].fillna(0).astype(float) if 'agent' in df.columns else 0.0
