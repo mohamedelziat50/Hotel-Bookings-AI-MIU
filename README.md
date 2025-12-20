@@ -74,14 +74,19 @@ Note that some CSV column names differ from the frontend form labels for better 
 | `agent` | **Agent ID** (optional) |
 | `city` | **City** (optional) |
 
-**Note:** The following CSV columns are not used in the frontend form and can be ignored when testing. These columns were excluded during the **Genetic Algorithm (GA) feature selection** process, which identified the optimal subset of features for model training:
+**Note:** The following CSV columns are not used in the frontend form and can be ignored when testing. These columns were excluded for different reasons (as documented in `Hotel_Booking.ipynb`):
 
+**Dropped before feature selection (data preprocessing):**
+- `company` - Dropped due to high missing values (94.3% missing); removed during data cleaning phase (see notebook section on missing values)
+- `arrival_date_year` - Dropped during preprocessing; year information was not needed for prediction
+- `reservation_status` - Dropped as a data leakage feature (contains the outcome information we're trying to predict - "Check-Out" or "Canceled")
+- `reservation_status_date` - Dropped as a data leakage feature (date when status was finalized, which is post-booking information)
+
+**Excluded by Genetic Algorithm (GA) feature selection:**
+- `previous_cancellations` - Not selected by GA (may be system-related or not available at prediction time)
+- `previous_bookings_not_canceled` - Not selected by GA (may be system-related or not available at prediction time)
+- `booking_changes` - Not selected by GA (may be system-related or not available at prediction time)
+- `days_in_waiting_list` - Not selected by GA (automatically set to 0 in preprocessing if not provided)
+
+**Target variable (not a feature):**
 - `is_canceled` - This is the target variable (what we're predicting), not an input feature
-- `arrival_date_year` - Excluded by GA feature selection; the model doesn't use year information for prediction
-- `previous_cancellations` - Excluded by GA feature selection; historical cancellation data was not selected as a relevant feature
-- `previous_bookings_not_canceled` - Excluded by GA feature selection; historical booking data was not selected as a relevant feature
-- `booking_changes` - Excluded by GA feature selection; booking modification history was not selected as a relevant feature
-- `company` - Excluded by GA feature selection; company information was not selected as a relevant feature
-- `days_in_waiting_list` - Excluded by GA feature selection; automatically set to 0 in the preprocessing pipeline if not provided, so no user input needed
-- `reservation_status` - This is the outcome/result of the booking (e.g., "Check-Out", "Canceled"), not an input feature
-- `reservation_status_date` - This is the date when the reservation status was determined, not an input feature
