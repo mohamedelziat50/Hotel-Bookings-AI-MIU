@@ -8,7 +8,6 @@
   [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
   [![Flask](https://img.shields.io/badge/framework-Flask-lightgrey.svg)](https://flask.palletsprojects.com/)
   [![scikit-learn](https://img.shields.io/badge/scikit--learn-1.6+-orange.svg)](https://scikit-learn.org/)
-  [![MLP](https://img.shields.io/badge/model-MLP-green.svg)](https://scikit-learn.org/stable/modules/neural_networks.html)
   
   📊 **Dataset**: Hotel Bookings Dataset (119,390 bookings)
 </div>
