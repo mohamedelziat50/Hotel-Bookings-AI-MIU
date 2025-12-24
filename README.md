@@ -1,6 +1,7 @@
 # 🏨 Hotel Booking Cancellation Prediction System
 
 <div align="center">
+  <img src="static/images/hotel-cancellation.png" alt="Hotel Booking Cancellation Prediction" width="300"/>
   
   <br/>
   
@@ -16,14 +17,22 @@
 
 ## Project Overview
 
-A web-based machine learning system that predicts hotel booking cancellations to help hotels optimize revenue management. The system analyzes booking details (lead time, guest info, hotel type, dates, preferences) to predict cancellation likelihood, enabling:
+A full machine learning pipeline project that predicts hotel booking cancellations (target variable: `is_canceled`). The project implements:
 
-- **Overbooking optimization** - Understand cancellation risk
-- **Revenue management** - Identify high-risk bookings early
-- **Operational planning** - Forecast actual occupancy
-- **Loss reduction** - Minimize revenue loss from cancellations
+- **Data Preprocessing & Cleaning** - Missing values, outliers, data type conversion, encoding
+- **Exploratory Data Analysis (EDA)** - Visual analysis of booking patterns and cancellation trends
+- **Feature Engineering** - Creating derived features from dates and booking characteristics
+- **Feature Selection** - Genetic Algorithm (GA) to select optimal feature subset
+- **Model Building & Comparison** - KNN, Decision Tree, and MLP (Multi-Layer Perceptron) neural network models
+- **Performance Evaluation** - Accuracy, Precision, Recall, F1 Score, Confusion Matrix
+- **Web Deployment** - Flask-based web interface for real-time predictions
 
-Uses Genetic Algorithm (GA) feature selection and neural network classification trained on 119,390 historical bookings.
+Trained on 119,390 booking records with 33 original features, reduced to 308 selected features via Genetic Algorithm Feature Selection (44.6% reduction).
+
+**Resources:**
+- 📓 [Notebook Implementation](https://github.com/mohamedelziat50/Hotel-Bookings-AI-MIU/blob/main/Hotel_Booking.ipynb) - Full ML pipeline implementation
+- 📄 [Research Paper](https://github.com/mohamedelziat50/Hotel-Bookings-AI-MIU/blob/main/Documents/IEEE_Conference_Hotel_Booking.pdf) - IEEE Conference paper
+- 📊 [Dataset](https://github.com/mohamedelziat50/Hotel-Bookings-AI-MIU/blob/main/hotel_bookings.csv) - Hotel bookings dataset (119,390 records)
 
 ## Demo
 
@@ -31,42 +40,77 @@ Uses Genetic Algorithm (GA) feature selection and neural network classification 
 
 The following predictions are based on actual data rows from the `hotel_bookings.csv` dataset:
 
-- **Not Cancelled Prediction (Row 4):** ![Not Cancelled Prediction](demo/not_cancelled_prediction.png)
-  *Prediction using data from Row 4 of the dataset (target: not cancelled)*
+**Not Cancelled Prediction (Row 4):**
 
-- **Cancelled Prediction (Row 10):** ![Cancelled Prediction](demo/cancelled_prediction.png)
-  *Prediction using data from Row 10 of the dataset (target: cancelled)*
+<img src="https://github.com/user-attachments/assets/9bec58d9-aba0-4eb5-803b-2ad6c7ecc924" alt="Not Cancelled Prediction" width="450"/>
+
+*Prediction using data from Row 4 of the dataset (target: not cancelled)*
+
+**Cancelled Prediction (Row 10):**
+
+<img src="https://github.com/user-attachments/assets/e9731016-b215-4998-a7eb-26fbd8d7fb9e" alt="Cancelled Prediction" width="450"/>
+
+*Prediction using data from Row 10 of the dataset (target: cancelled)*
 
 ## How It Works
 
-### 1. User Input
-Hotel staff input booking details through the web interface (guest info, dates, preferences, etc.)
+### Training Pipeline (Notebook Implementation)
 
-### 2. Data Preprocessing
-Input is automatically processed:
-- Feature engineering (e.g., `total_stay`, `total_guests`, `is_month_start`, `is_month_end`)
-- Categorical encoding and one-hot encoding
-- Feature selection (uses 308 GA-selected features from 556 original)
+**A. Data Preprocessing & Cleaning**
+- Handle missing values (imputation with median/mode)
+- Fix data types and remove duplicates
+- Handle outliers using IQR method for selected numerical columns
+- Remove data leakage features (`reservation_status`, `reservation_status_date`)
+- Drop high missing value columns (`company` - 94.3% missing)
 
-### 3. Prediction
-Trained model analyzes booking characteristics and returns cancellation prediction (cancelled/not cancelled)
+**B. Exploratory Data Analysis (EDA)**
+- Distribution analysis of cancellations
+- Booking trends by month, week, city
+- ADR vs cancellation relationships
+- Correlation heatmaps
+- Lead time analysis
+- Categorical feature analysis
 
-### 4. Model Training
-- **Genetic Algorithm**: Selected 308 most predictive features (44.6% reduction)
-- **SMOTE**: Handled class imbalance
-- **Neural Network (MLP)**: Trained on 119,390 historical bookings
+**C. Data Balance Handling**
+- Check target variable distribution
+- Apply SMOTE (Synthetic Minority Oversampling Technique) to handle class imbalance
 
-## Features
+**D. Feature Engineering**
+- Extract date features (`is_month_start`, `is_month_end`, `is_peak_season`)
+- Create derived features (`total_stay`, `total_guests`)
+- Convert categorical to numerical (Label Encoding, One-Hot Encoding)
+- Result: 556 features after encoding
 
-- 🎯 Real-time cancellation prediction
-- 📊 Interactive web interface
-- 🔬 GA-based feature selection (308 features from 556)
-- ⚖️ SMOTE for class imbalance
-- 🧠 MLP neural network classifier
+**E. Feature Selection (Genetic Algorithm)**
+- Apply GA to select optimal feature subset
+- Reduce from 556 to 308 features (44.6% reduction)
+- Test impact on model performance
 
-## Dataset
+**F. Model Building & Comparison**
+- Train/validation/test split (70/15/15)
+- Build and compare: KNN, Decision Tree, MLP (Multi-Layer Perceptron) neural network
+- Hyperparameter tuning using validation set
+- Best model: MLP neural network (selected for deployment)
 
-Trained on **119,390 booking records** with 33 original features including hotel type, booking dates, guest info, preferences, and market segment data.
+**G. Performance Evaluation**
+- Compute metrics: Accuracy, Precision, Recall, F1 Score
+- Generate confusion matrices
+- Compare all models and select best performer
+
+### Deployment Pipeline (Web Application)
+
+1. **User Input** - Hotel staff input booking details through web interface
+2. **Preprocessing** - Apply same preprocessing pipeline as training (see [notebook](https://github.com/mohamedelziat50/Hotel-Bookings-AI-MIU/blob/main/Hotel_Booking.ipynb)): feature engineering, encoding, feature selection, standardization
+3. **Prediction** - Load pre-trained MLP (Multi-Layer Perceptron) neural network model and return cancellation prediction
+
+**Model Persistence:**
+- Models and preprocessing tools are saved using `joblib` during training (see [notebook](https://github.com/mohamedelziat50/Hotel-Bookings-AI-MIU/blob/main/Hotel_Booking.ipynb)):
+  - `mlp_model.joblib` - Trained MLP neural network
+  - `scaler.joblib` - StandardScaler fitted on training data
+  - `selected_features.joblib` - List of 308 GA-selected features
+  - `label_encoders.joblib` - Label encoders for categorical features
+- At runtime, Flask application loads these saved artifacts from the `models/` directory using `joblib.load()`
+
 
 ## Setup Instructions
 
@@ -104,7 +148,7 @@ http://localhost:3000
 
 ## Testing the Model
 
-To test the deployed Flask model, you can use specific rows from the `hotel_bookings.csv` dataset:
+To test the deployed Flask model, you can use specific rows from the [dataset](https://github.com/mohamedelziat50/Hotel-Bookings-AI-MIU/blob/main/hotel_bookings.csv):
 
 - **Row 4** (target: not cancelled): Use this row to test a booking that should predict as "not cancelled"
 - **Row 10** (target: cancelled): Use this row to test a booking that should predict as "cancelled"
@@ -142,7 +186,7 @@ Note that some CSV column names differ from the frontend form labels for better 
 | `agent` | **Agent ID** (optional) |
 | `city` | **City** (optional) |
 
-**Note:** The following CSV columns are not used in the frontend form and can be ignored when testing. These columns were excluded for different reasons (as documented in `Hotel_Booking.ipynb`):
+**Note:** The following CSV columns are not used in the frontend form and can be ignored when testing. These columns were excluded for different reasons (as documented in the [notebook](https://github.com/mohamedelziat50/Hotel-Bookings-AI-MIU/blob/main/Hotel_Booking.ipynb)):
 
 **Dropped before feature selection (data preprocessing):**
 - `company` - Dropped due to high missing values (94.3% missing); removed during data cleaning phase (see notebook section on missing values)
