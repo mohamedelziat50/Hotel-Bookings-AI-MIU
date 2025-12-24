@@ -1,7 +1,7 @@
 # 🏨 Hotel Booking Cancellation Prediction System
 
 <div align="center">
-  <img src="static/images/hotel-cancellation.png" alt="Hotel Booking Cancellation Prediction" width="300"/>
+  <img src="static/images/hotel-cancellation.png" alt="Hotel Booking Cancellation Prediction" width="450"/>
   
   <br/>
   
