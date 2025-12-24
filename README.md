@@ -1,4 +1,72 @@
-# Hotel-Bookings-AI-MIU
+# 🏨 Hotel Booking Cancellation Prediction System
+
+<div align="center">
+  
+  <br/>
+  
+  [![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/)
+  [![Flask](https://img.shields.io/badge/framework-Flask-lightgrey.svg)](https://flask.palletsprojects.com/)
+  [![scikit-learn](https://img.shields.io/badge/scikit--learn-1.6+-orange.svg)](https://scikit-learn.org/)
+  [![MLP](https://img.shields.io/badge/model-MLP-green.svg)](https://scikit-learn.org/stable/modules/neural_networks.html)
+  
+  📊 **Dataset**: Hotel Bookings Dataset (119,390 bookings)
+</div>
+
+---
+
+## Project Overview
+
+A web-based machine learning system that predicts hotel booking cancellations to help hotels optimize revenue management. The system analyzes booking details (lead time, guest info, hotel type, dates, preferences) to predict cancellation likelihood, enabling:
+
+- **Overbooking optimization** - Understand cancellation risk
+- **Revenue management** - Identify high-risk bookings early
+- **Operational planning** - Forecast actual occupancy
+- **Loss reduction** - Minimize revenue loss from cancellations
+
+Uses Genetic Algorithm (GA) feature selection and neural network classification trained on 119,390 historical bookings.
+
+## Demo
+
+### Prediction Examples
+
+The following predictions are based on actual data rows from the `hotel_bookings.csv` dataset:
+
+- **Not Cancelled Prediction (Row 4):** ![Not Cancelled Prediction](demo/not_cancelled_prediction.png)
+  *Prediction using data from Row 4 of the dataset (target: not cancelled)*
+
+- **Cancelled Prediction (Row 10):** ![Cancelled Prediction](demo/cancelled_prediction.png)
+  *Prediction using data from Row 10 of the dataset (target: cancelled)*
+
+## How It Works
+
+### 1. User Input
+Hotel staff input booking details through the web interface (guest info, dates, preferences, etc.)
+
+### 2. Data Preprocessing
+Input is automatically processed:
+- Feature engineering (e.g., `total_stay`, `total_guests`, `is_month_start`, `is_month_end`)
+- Categorical encoding and one-hot encoding
+- Feature selection (uses 308 GA-selected features from 556 original)
+
+### 3. Prediction
+Trained model analyzes booking characteristics and returns cancellation prediction (cancelled/not cancelled)
+
+### 4. Model Training
+- **Genetic Algorithm**: Selected 308 most predictive features (44.6% reduction)
+- **SMOTE**: Handled class imbalance
+- **Neural Network (MLP)**: Trained on 119,390 historical bookings
+
+## Features
+
+- 🎯 Real-time cancellation prediction
+- 📊 Interactive web interface
+- 🔬 GA-based feature selection (308 features from 556)
+- ⚖️ SMOTE for class imbalance
+- 🧠 MLP neural network classifier
+
+## Dataset
+
+Trained on **119,390 booking records** with 33 original features including hotel type, booking dates, guest info, preferences, and market segment data.
 
 ## Setup Instructions
 
