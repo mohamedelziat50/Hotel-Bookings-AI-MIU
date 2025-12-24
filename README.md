@@ -41,13 +41,13 @@ The following predictions are based on actual data rows from the `hotel_bookings
 
 **Not Cancelled Prediction (Row 4):**
 
-<img src="https://github.com/user-attachments/assets/9bec58d9-aba0-4eb5-803b-2ad6c7ecc924" alt="Not Cancelled Prediction" width="450"/>
+<img src="https://github.com/user-attachments/assets/9bec58d9-aba0-4eb5-803b-2ad6c7ecc924" alt="Not Cancelled Prediction" width="650"/>
 
 *Prediction using data from Row 4 of the dataset (target: not cancelled)*
 
 **Cancelled Prediction (Row 10):**
 
-<img src="https://github.com/user-attachments/assets/e9731016-b215-4998-a7eb-26fbd8d7fb9e" alt="Cancelled Prediction" width="450"/>
+<img src="https://github.com/user-attachments/assets/e9731016-b215-4998-a7eb-26fbd8d7fb9e" alt="Cancelled Prediction" width="650"/>
 
 *Prediction using data from Row 10 of the dataset (target: cancelled)*
 
