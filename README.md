@@ -28,11 +28,13 @@ A full machine learning pipeline project that predicts hotel booking cancellatio
 
 Trained on 119,390 booking records with 33 original features, reduced to 308 selected features via Genetic Algorithm Feature Selection (44.6% reduction).
 
-**Resources:**
-- 📓 [Notebook Implementation](https://github.com/mohamedelziat50/Hotel-Bookings-AI-MIU/blob/main/Hotel_Booking.ipynb) - Full ML pipeline implementation
-- 📄 [Research Paper](https://github.com/mohamedelziat50/Hotel-Bookings-AI-MIU/blob/main/Documents/IEEE_Conference_Hotel_Booking.pdf) - IEEE Conference paper
-- 📊 [Dataset](https://github.com/mohamedelziat50/Hotel-Bookings-AI-MIU/blob/main/hotel_bookings.csv) - Hotel bookings dataset (119,390 records)
+### Resources
 
+| Resource | Description | Link |
+|----------|-------------|------|
+| 📓 **Notebook** | Full ML pipeline implementation | [View Notebook](https://github.com/mohamedelziat50/Hotel-Bookings-AI-MIU/blob/main/Hotel_Booking.ipynb) |
+| 📄 **Research Paper** | IEEE Conference paper | [View Paper](https://github.com/mohamedelziat50/Hotel-Bookings-AI-MIU/blob/main/Documents/IEEE_Conference_Hotel_Booking.pdf) |
+| 📊 **Dataset** | Hotel bookings dataset (119,390 records) | [View Dataset](https://github.com/mohamedelziat50/Hotel-Bookings-AI-MIU/blob/main/hotel_bookings.csv) |
 ## Demo
 
 ### Prediction Examples
